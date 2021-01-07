@@ -33,14 +33,14 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
 
     private fun removeAt(pos: Int): Boolean {
         list.removeAt(pos)
-        recyclerView.adapter?.notifyDataSetChanged()
+        recyclerView.adapter?.notifyItemRemoved(pos)
         return true
     }
 
     override fun onEditorAction(textView: TextView?, actionId: Int, keyEvent: KeyEvent?): Boolean {
       if(actionId == EditorInfo.IME_ACTION_DONE){ // Si on a validé le texte saisi
           list.add(editText.text.toString()) // On ajoute le texte à la liste
-          recyclerView.adapter?.notifyDataSetChanged() // On prévient que la liste a changé et doit être réaffichée
+          recyclerView.adapter?.notifyItemInserted(list.size-1) // On prévient que la liste a changé et doit être réaffichée
           editText.text.clear(); // On efface le texte, pour faire de la place pour le prochain élément
           return true;
       }
