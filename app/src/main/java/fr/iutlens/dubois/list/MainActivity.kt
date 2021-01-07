@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppDatabase.getDatabase(this)
 
         setContentView(R.layout.activity_main)
 
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
         // On précise aussi les fonctions à appeler lors d'un clic (court / long) sur un élément
         // (ici : appui long pour retirer de la liste)
         adapter = CustomAdapter(R.layout.text_row_item, null, this::removeAt)
-        model.allElements(AppDatabase.getDatabase(this)).observe(this) {
+        model.allElements()?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
         }
@@ -43,14 +44,14 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
     }
 
     private fun removeAt(pos: Int): Boolean {
-        model.delete(AppDatabase.getDatabase(this),adapter.currentList.get(pos))
+        model.delete(adapter.currentList.get(pos))
         return true
     }
 
     override fun onEditorAction(textView: TextView?, actionId: Int, keyEvent: KeyEvent?): Boolean {
       if(actionId == EditorInfo.IME_ACTION_DONE){ // Si on a validé le texte saisi
           val element = Element(editText.text.toString())
-          model.insert(AppDatabase.getDatabase(this),element)
+          model.insert(element)
           editText.text.clear(); // On efface le texte, pour faire de la place pour le prochain élément
           return true;
       }
