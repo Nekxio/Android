@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">List</string>
+    <string-array name="liste">
+        <item>France</item>
+        <item>Italie</item>
+        <item>Belgique</item>
+        <item>Espagne</item>
+        <item>Suisse</item>
+    </string-array>
+</resources>
