@@ -1,16 +1,19 @@
 package fr.iutlens.dubois.list
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 
 class CustomAdapter(private val row_item_layout: Int,
-                    private val onItemClickListener: ((Int) -> Unit)?,
-                    private val onItemLongClickListener: ((Int) -> Boolean)?):
+                    private val onItemClickListener: ((Article) -> Unit)?,
+                    private val onItemLongClickListener: ((Article) -> Boolean)?):
     ListAdapter<Article, CustomAdapter.ViewHolder>(ElementComparator()) {
 
     /**
@@ -19,6 +22,7 @@ class CustomAdapter(private val row_item_layout: Int,
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.textView)
+        val imageView: ImageView = view.findViewById(R.id.imageView)
     }
 
     // Create new views (invoked by the layout manager)
@@ -35,15 +39,19 @@ class CustomAdapter(private val row_item_layout: Int,
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = getItem(position).title
+        val article = getItem(position)
+        viewHolder.textView.text = article.title
+        Log.d("Adapter","image :"+ article.image)
+        article.image?.let { Picasso.get().load(it).into(viewHolder.imageView); }
+
 
         // Set listeners on item (?.let content is executed only when listener is not null)
         onItemClickListener?.let {
-            viewHolder.itemView.setOnClickListener { it(position) }
+            viewHolder.itemView.setOnClickListener { it(article) }
         }
 
         onItemLongClickListener?.let {
-            viewHolder.itemView.setOnLongClickListener { it(position) }
+            viewHolder.itemView.setOnLongClickListener { it(article) }
         }
     }
 

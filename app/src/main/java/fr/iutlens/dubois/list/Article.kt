@@ -10,9 +10,10 @@ data class Article(
     @PrimaryKey val guid: String,
                 val title: String? = null,
                 val description: String? = null,
+                val link: String? = null,
                 val image: String? = null,
                 val pubDate: String? = null){
 
     constructor(article: com.prof.rssparser.Article) :
-            this(article.guid!!,article.title,article.description,article.image, article.pubDate)
+            this(article.guid!!,article.title,article.description, article.link,article.image, article.pubDate)
 }

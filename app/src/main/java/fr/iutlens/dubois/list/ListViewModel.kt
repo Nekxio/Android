@@ -27,10 +27,10 @@ class ListViewModel() : ViewModel() {
         val parser = Parser.Builder()
             .context(context)
             .charset(Charset.forName("UTF8"))
-            .cacheExpirationMillis(24L * 60L * 60L * 100L) // one day
+            .cacheExpirationMillis(10 * 60L * 100L) // 10 minutes
             .build()
 
-        val url = "https://news.google.com/rss/search?q=source:AFP&um=1&ie=UTF-8&num=100&hl=fr&gl=FR&ceid=FR:fr"
+        val url = "https://www.francetvinfo.fr/titres.rss" //"https://news.google.com/rss/search?q=source:AFP&um=1&ie=UTF-8&num=100&hl=fr&gl=FR&ceid=FR:fr"
 
         viewModelScope.launch {
             try {

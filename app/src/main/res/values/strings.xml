@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">List</string>
+    <string name="app_name">Actu</string>
     <string-array name="liste">
         <item>France</item>
         <item>Italie</item>
