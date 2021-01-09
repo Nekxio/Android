@@ -5,15 +5,22 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.activity.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
-    val list = mutableListOf<String>()
+    private lateinit var adapter: CustomAdapter
+
+    private val model: ListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppDatabase.getDatabase(this)
+
         setContentView(R.layout.activity_main)
 
         ///////////////// configuration du recyclerView
@@ -24,7 +31,12 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
         // le layout R.layout.text_row_item
         // On précise aussi les fonctions à appeler lors d'un clic (court / long) sur un élément
         // (ici : appui long pour retirer de la liste)
-        recyclerView.adapter = CustomAdapter(list, R.layout.text_row_item, null, this::removeAt)
+        adapter = CustomAdapter(R.layout.text_row_item, null, this::removeAt)
+        model.allElements()?.observe(this) {
+            // Update the cached copy of the words in the adapter.
+            adapter.submitList(it)
+        }
+        recyclerView.adapter = adapter
 
         ///////////////// Configuration du EditText
         // On écoute ici (dans MainActivity) les évènements (c'est la fin de la saisie qui nous intéresse)
@@ -32,15 +44,14 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
     }
 
     private fun removeAt(pos: Int): Boolean {
-        list.removeAt(pos)
-        recyclerView.adapter?.notifyItemRemoved(pos)
+        model.delete(adapter.currentList.get(pos))
         return true
     }
 
     override fun onEditorAction(textView: TextView?, actionId: Int, keyEvent: KeyEvent?): Boolean {
       if(actionId == EditorInfo.IME_ACTION_DONE){ // Si on a validé le texte saisi
-          list.add(editText.text.toString()) // On ajoute le texte à la liste
-          recyclerView.adapter?.notifyItemInserted(list.size-1) // On prévient que la liste a changé et doit être réaffichée
+          val element = Element(editText.text.toString())
+          model.insert(element)
           editText.text.clear(); // On efface le texte, pour faire de la place pour le prochain élément
           return true;
       }
