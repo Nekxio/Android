@@ -6,11 +6,8 @@ import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
     private lateinit var adapter: CustomAdapter
@@ -22,6 +19,8 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
         AppDatabase.getDatabase(this)
 
         setContentView(R.layout.activity_main)
+
+        model.getChannel(this)
 
         ///////////////// configuration du recyclerView
         // On configure comment les éléments de la liste sont organisés : LinearLayout => liste
@@ -50,7 +49,7 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
 
     override fun onEditorAction(textView: TextView?, actionId: Int, keyEvent: KeyEvent?): Boolean {
       if(actionId == EditorInfo.IME_ACTION_DONE){ // Si on a validé le texte saisi
-          val element = Element(editText.text.toString())
+          val element = Article(editText.text.toString())
           model.insert(element)
           editText.text.clear(); // On efface le texte, pour faire de la place pour le prochain élément
           return true;

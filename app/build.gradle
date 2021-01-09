@@ -70,6 +70,6 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
 
-
+    implementation 'com.prof.rssparser:rssparser:3.1.2'
 
 }

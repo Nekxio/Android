@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 class CustomAdapter(private val row_item_layout: Int,
                     private val onItemClickListener: ((Int) -> Unit)?,
                     private val onItemLongClickListener: ((Int) -> Boolean)?):
-    ListAdapter<Element, CustomAdapter.ViewHolder>(ElementComparator()) {
+    ListAdapter<Article, CustomAdapter.ViewHolder>(ElementComparator()) {
 
     /**
      * Provide a reference to the type of views that you are using
@@ -35,7 +35,7 @@ class CustomAdapter(private val row_item_layout: Int,
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = getItem(position).description
+        viewHolder.textView.text = getItem(position).title
 
         // Set listeners on item (?.let content is executed only when listener is not null)
         onItemClickListener?.let {
@@ -48,13 +48,13 @@ class CustomAdapter(private val row_item_layout: Int,
     }
 
 
-    class ElementComparator : DiffUtil.ItemCallback<Element>() {
-        override fun areItemsTheSame(oldItem: Element, newItem: Element): Boolean {
-            return oldItem.description == newItem.description
+    class ElementComparator : DiffUtil.ItemCallback<Article>() {
+        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+            return oldItem.guid == newItem.guid
         }
 
-        override fun areContentsTheSame(oldItem: Element, newItem: Element): Boolean {
-            return oldItem.description == newItem.description && oldItem.num == newItem.num
+        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+            return oldItem == newItem
         }
     }
 }

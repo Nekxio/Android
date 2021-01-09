@@ -5,9 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Element::class], version = 1)
+@Database(entities = [Article::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun elementDao(): ElementDao
+    abstract fun articleDao(): articleDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the
@@ -24,7 +24,7 @@ abstract class AppDatabase : RoomDatabase() {
                             it.applicationContext,
                             AppDatabase::class.java,
                             "database"
-                    ).build()
+                    ).fallbackToDestructiveMigration().build()
                     INSTANCE = instance
                     // return instance
                     instance
