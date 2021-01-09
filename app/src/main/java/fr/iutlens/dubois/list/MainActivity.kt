@@ -35,18 +35,11 @@ class MainActivity : AppCompatActivity(){
         model.allElements()?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
+            swipeLayout.isRefreshing = false;
         }
         recyclerView.adapter = adapter
 
-        // Détection fin de scroll -> recharger
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    model.getChannel(this@MainActivity)
-                }
-            }
-        })
+        swipeLayout.setOnRefreshListener { model.getChannel(this@MainActivity) }
 
     }
 

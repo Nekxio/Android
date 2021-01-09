@@ -41,8 +41,12 @@ class CustomAdapter(private val row_item_layout: Int,
         // contents of the view with that element
         val article = getItem(position)
         viewHolder.textView.text = article.title
-        Log.d("Adapter","image :"+ article.image)
-        article.image?.let { Picasso.get().load(it).into(viewHolder.imageView); }
+        Log.d("Adapter","pubDate :"+ article.pubDate)
+        if (article.image == null){
+            viewHolder.imageView.setImageDrawable(null)
+        } else {
+            article.image?.let { Picasso.get().load(article.image).into(viewHolder.imageView); }
+        }
 
 
         // Set listeners on item (?.let content is executed only when listener is not null)

@@ -19,30 +19,41 @@ class ListViewModel() : ViewModel() {
         AppDatabase.getDatabase()?.articleDao()?.delete(element)
     }
 
+    fun clear() =  viewModelScope.launch {
+        AppDatabase.getDatabase()?.articleDao()?.clear()
+    }
+
     fun allElements(): LiveData<List<Article>>? {
         return AppDatabase.getDatabase()?.articleDao()?.getAll()?.asLiveData()
     }
 
     fun getChannel(context: Context) {
+//        clear()
         val parser = Parser.Builder()
             .context(context)
             .charset(Charset.forName("UTF8"))
             .cacheExpirationMillis(10 * 60L * 100L) // 10 minutes
             .build()
 
-        val url = "https://www.francetvinfo.fr/titres.rss" //"https://news.google.com/rss/search?q=source:AFP&um=1&ie=UTF-8&num=100&hl=fr&gl=FR&ceid=FR:fr"
+        val url = arrayOf(
+            "https://www.francetvinfo.fr/titres.rss",
+            "https://www.lemonde.fr/rss/en_continu.xml",
+            "https://www.france24.com/fr/rss",
+            "http://feeds.bbci.co.uk/news/world/rss.xml")
 
-        viewModelScope.launch {
-            try {
-                val channel = parser.getChannel(url)
+        url.forEach {
+            viewModelScope.launch {
+                try {
+                    val channel = parser.getChannel(it)
 
-                AppDatabase.getDatabase()?.articleDao()?.insertAll(
-                    *channel.articles.map { Article(it) }.toTypedArray()
-                )
-                // Do something with your data
-            } catch (e: Exception) {
-                e.printStackTrace()
-                // Handle the exception
+                    AppDatabase.getDatabase()?.articleDao()?.insertAll(
+                        *channel.articles.map { Article(it,channel.image?.url) }.toTypedArray()
+                    )
+                    // Do something with your data
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    // Handle the exception
+                }
             }
         }
     }

@@ -14,6 +14,8 @@ data class Article(
                 val image: String? = null,
                 val pubDate: String? = null){
 
-    constructor(article: com.prof.rssparser.Article) :
-            this(article.guid!!,article.title,article.description, article.link,article.image, article.pubDate)
+    constructor(article: com.prof.rssparser.Article, channelImage : String?= null) :
+            this(article.guid!!,article.title,article.description, article.link,article.image ?: channelImage, article.pubDate)
+
+
 }

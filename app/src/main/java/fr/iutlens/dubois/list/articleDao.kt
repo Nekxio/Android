@@ -11,6 +11,9 @@ interface articleDao {
     @Query("SELECT * FROM article WHERE guid LIKE :guid LIMIT 1")
     suspend fun findByGUID(guid: String): Article
 
+    @Query("DELETE FROM article")
+    suspend fun clear()
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg elements: Article)
 
