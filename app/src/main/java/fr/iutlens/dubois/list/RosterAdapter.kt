@@ -7,11 +7,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import org.jivesoftware.smack.roster.RosterEntry
 
-class CustomAdapter(private val row_item_layout: Int,
-                    private val onItemClickListener: ((Int) -> Unit)?,
-                    private val onItemLongClickListener: ((Int) -> Boolean)?):
-    ListAdapter<Element, CustomAdapter.ViewHolder>(ElementComparator()) {
+class RosterAdapter(private val row_item_layout: Int,
+                    private val onItemClickListener: ((RosterEntry) -> Unit)?,
+                    private val onItemLongClickListener: ((RosterEntry) -> Boolean)?):
+    ListAdapter<RosterEntry, RosterAdapter.ViewHolder>(ElementComparator()) {
 
     /**
      * Provide a reference to the type of views that you are using
@@ -35,26 +36,27 @@ class CustomAdapter(private val row_item_layout: Int,
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = getItem(position).description
+        val entry : RosterEntry = getItem(position)
+        viewHolder.textView.text = entry.jid.toString()
 
         // Set listeners on item (?.let content is executed only when listener is not null)
         onItemClickListener?.let {
-            viewHolder.itemView.setOnClickListener { it(position) }
+            viewHolder.itemView.setOnClickListener { it(entry) }
         }
 
         onItemLongClickListener?.let {
-            viewHolder.itemView.setOnLongClickListener { it(position) }
+            viewHolder.itemView.setOnLongClickListener { it(entry) }
         }
     }
 
 
-    class ElementComparator : DiffUtil.ItemCallback<Element>() {
-        override fun areItemsTheSame(oldItem: Element, newItem: Element): Boolean {
-            return oldItem.description == newItem.description
+    class ElementComparator : DiffUtil.ItemCallback<RosterEntry>() {
+        override fun areItemsTheSame(oldItem: RosterEntry, newItem: RosterEntry): Boolean {
+            return oldItem.jid == newItem.jid
         }
 
-        override fun areContentsTheSame(oldItem: Element, newItem: Element): Boolean {
-            return oldItem.description == newItem.description && oldItem.num == newItem.num
+        override fun areContentsTheSame(oldItem: RosterEntry, newItem: RosterEntry): Boolean {
+            return oldItem == newItem
         }
     }
 }

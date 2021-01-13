@@ -10,6 +10,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,7 @@ import org.jivesoftware.smack.android.AndroidSmackInitializer
 
 class MainActivity : AppCompatActivity() {
 
+    private val rosterModel: RosterModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,10 @@ class MainActivity : AppCompatActivity() {
                     .replace(R.id.fragment_container, fragment)
                     .commitAllowingStateLoss()
             }
+        }
+
+        rosterModel.selection.observe(this){
+            Log.d("Selection",it.jid.toString())
         }
 
 
