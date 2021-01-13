@@ -1,60 +1,69 @@
 package fr.iutlens.dubois.list
 
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.security.ProviderInstaller
+import fr.iutlens.dubois.list.ui.login.LoginFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_roster.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import org.jivesoftware.smack.android.AndroidSmackInitializer
 
-class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
-    private lateinit var adapter: CustomAdapter
+class MainActivity : AppCompatActivity() {
 
-    private val model: ListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppDatabase.getDatabase(this)
+
+        // Décommentez la ligne suivante pour vider les informations de login au prochain lancement
+//        getSharedPreferences("login", MODE_PRIVATE).edit().clear().apply()
 
         setContentView(R.layout.activity_main)
 
-        ///////////////// configuration du recyclerView
-        // On configure comment les éléments de la liste sont organisés : LinearLayout => liste
-        recyclerView.layoutManager = GridLayoutManager(this,3)
+        Status.result.observe(this){
+            textViewStatus.text=it.description
+            textViewStatus.visibility =  if (it is Result.Success) View.GONE else View.VISIBLE
+            progressBar.visibility = if (it is Result.Processing) View.VISIBLE else View.GONE
 
-        // On configure l'adapter, qui prendra les éléments de list, et les affichera en utilisant
-        // le layout R.layout.text_row_item
-        // On précise aussi les fonctions à appeler lors d'un clic (court / long) sur un élément
-        // (ici : appui long pour retirer de la liste)
-        adapter = CustomAdapter(R.layout.text_row_item, null, this::removeAt)
-        model.allElements()?.observe(this) {
-            // Update the cached copy of the words in the adapter.
-            adapter.submitList(it)
+            if (it is Result.Success){
+                val fragment = RosterFragment()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commitAllowingStateLoss()
+            }
         }
-        recyclerView.adapter = adapter
 
-        ///////////////// Configuration du EditText
-        // On écoute ici (dans MainActivity) les évènements (c'est la fin de la saisie qui nous intéresse)
-        editText.setOnEditorActionListener(this)
+
+        if(savedInstanceState == null) { // initial transaction should be wrapped like this
+            val fragment : Fragment = if (SmackStore.neverLogged(this))  LoginFragment() else RosterFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commitAllowingStateLoss()
+        }
+        init()
     }
 
-    private fun removeAt(pos: Int): Boolean {
-        model.delete(adapter.currentList.get(pos))
-        return true
-    }
+    private fun init() {
+        GlobalScope.launch {
+            ProviderInstaller.installIfNeeded(this@MainActivity)
+            AndroidSmackInitializer.initialize(this@MainActivity);
 
-    override fun onEditorAction(textView: TextView?, actionId: Int, keyEvent: KeyEvent?): Boolean {
-      if(actionId == EditorInfo.IME_ACTION_DONE){ // Si on a validé le texte saisi
-          val element = Element(editText.text.toString())
-          model.insert(element)
-          editText.text.clear(); // On efface le texte, pour faire de la place pour le prochain élément
-          return true;
-      }
-      return false;
+
+            SmackStore.attemptDefaultLogin(this@MainActivity)
+        }
     }
 }
