@@ -1,4 +1,4 @@
-package fr.iutlens.dubois.list
+package fr.iutlens.dubois.list.roster
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import fr.iutlens.dubois.list.R
 import org.jivesoftware.smack.roster.RosterEntry
 
 class RosterAdapter(private val row_item_layout: Int,
