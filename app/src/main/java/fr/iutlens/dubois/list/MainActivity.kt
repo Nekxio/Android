@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         GlobalScope.launch {
+            AppDatabase.getDatabase(this@MainActivity)
             ProviderInstaller.installIfNeeded(this@MainActivity)
             AndroidSmackInitializer.initialize(this@MainActivity);
 
