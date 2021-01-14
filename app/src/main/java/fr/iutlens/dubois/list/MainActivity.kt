@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             progressBar.visibility = if (it is Result.Processing) View.VISIBLE else View.GONE
 
             if (it is Result.Success){
+                messageModel.updateConnection()
                 val fragment = RosterFragment()
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, fragment)
@@ -73,8 +74,6 @@ class MainActivity : AppCompatActivity() {
             AppDatabase.getDatabase(this@MainActivity)
             ProviderInstaller.installIfNeeded(this@MainActivity)
             AndroidSmackInitializer.initialize(this@MainActivity);
-
-
             SmackStore.attemptDefaultLogin(this@MainActivity)
         }
     }
