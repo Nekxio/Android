@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 class CustomAdapter(private val row_item_layout: Int,
-                    private val onItemClickListener: ((Int) -> Unit)?,
-                    private val onItemLongClickListener: ((Int) -> Boolean)?):
+                    private val onItemClickListener: ((Element) -> Unit)?,
+                    private val onItemLongClickListener: ((Element) -> Boolean)?):
     ListAdapter<Element, CustomAdapter.ViewHolder>(ElementComparator()) {
 
     /**
@@ -35,15 +35,16 @@ class CustomAdapter(private val row_item_layout: Int,
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = getItem(position).description
+        val item = getItem(position)
+        viewHolder.textView.text = item.description
 
         // Set listeners on item (?.let content is executed only when listener is not null)
         onItemClickListener?.let {
-            viewHolder.itemView.setOnClickListener { it(position) }
+            viewHolder.itemView.setOnClickListener { it(item) }
         }
 
         onItemLongClickListener?.let {
-            viewHolder.itemView.setOnLongClickListener { it(position) }
+            viewHolder.itemView.setOnLongClickListener { it(item) }
         }
     }
 

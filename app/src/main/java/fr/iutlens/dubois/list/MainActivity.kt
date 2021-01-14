@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
         editText.setOnEditorActionListener(this)
     }
 
-    private fun removeAt(pos: Int): Boolean {
-        model.delete(adapter.currentList.get(pos))
+    private fun removeAt(item : Element): Boolean {
+        model.delete(item)
         return true
     }
 
