@@ -26,7 +26,7 @@ import org.jivesoftware.smack.android.AndroidSmackInitializer
 
 class MainActivity : AppCompatActivity() {
 
-    private val rosterModel: RosterModel by viewModels()
+    private val messageModel: MessageModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +49,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        rosterModel.selection.observe(this){
+        messageModel.selection.observe(this){
             Log.d("Selection",it.jid.toString())
+            val fragment = MessageFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commitAllowingStateLoss()
         }
 
 
