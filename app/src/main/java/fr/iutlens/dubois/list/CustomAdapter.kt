@@ -38,11 +38,11 @@ class CustomAdapter(private val dataSet: List<String>,
 
         // Set listeners on item (?.let content is executed only when listener is not null)
         onItemClickListener?.let {
-            viewHolder.itemView.setOnClickListener { it(position) }
+            viewHolder.itemView.setOnClickListener {  it(viewHolder.adapterPosition) }
         }
 
         onItemLongClickListener?.let {
-            viewHolder.itemView.setOnLongClickListener { it(position) }
+            viewHolder.itemView.setOnLongClickListener { it(viewHolder.adapterPosition) }
         }
     }
 
