@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppDatabase.getDatabase(this)
-
+        model.clear()
         setContentView(R.layout.activity_main)
 
         model.getChannel(this)
