@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Actu</string>
-    <string name="button">Button</string>
-    <string name="button">Button</string>
-    <string name="button">Button</string>
+    <string name="decouvrir">Découvrir</string>
+    <string name="mon_actu">Mon actu</string>
+    <string name="a_la_une">A la une</string>
     <string-array name="liste">
         <item>France</item>
         <item>Italie</item>
