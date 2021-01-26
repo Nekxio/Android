@@ -22,6 +22,7 @@ class CustomAdapter(private val row_item_layout: Int,
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.textView)
+        val source: TextView = view.findViewById(R.id.source)
         val imageView: ImageView = view.findViewById(R.id.imageView)
     }
 
@@ -41,6 +42,7 @@ class CustomAdapter(private val row_item_layout: Int,
         // contents of the view with that element
         val article = getItem(position)
         viewHolder.textView.text = article.title
+        viewHolder.source.text = "source : ${article.source}"
         Log.d("Adapter","pubDate :"+ article.pubDate)
         if (article.image == null){
             viewHolder.imageView.setImageDrawable(null)

@@ -36,18 +36,18 @@ class ListViewModel() : ViewModel() {
             .build()
 
         val url = arrayOf(
-            "https://www.francetvinfo.fr/titres.rss",
-            "https://www.lemonde.fr/rss/en_continu.xml",
-            "https://www.france24.com/fr/rss",
-            "http://feeds.bbci.co.uk/news/world/rss.xml")
+            "https://www.francetvinfo.fr/titres.rss" to "France Info",
+            "https://www.lemonde.fr/rss/en_continu.xml" to "Le Monde",
+            "https://www.france24.com/fr/rss" to "France 24",
+            "http://feeds.bbci.co.uk/news/world/rss.xml" to "BBC")
 
         url.forEach {
             viewModelScope.launch {
                 try {
-                    val channel = parser.getChannel(it)
+                    val channel = parser.getChannel(it.first)
 
                     AppDatabase.getDatabase()?.articleDao()?.insertAll(
-                        *channel.articles.map { Article(it,channel.image?.url) }.toTypedArray()
+                        *channel.articles.map { article ->  Article(article,channel.image?.url,it.second) }.toTypedArray()
                     )
                     // Do something with your data
                 } catch (e: Exception) {
