@@ -3,6 +3,7 @@
     <string name="decouvrir">Découvrir</string>
     <string name="mon_actu">Mon actu</string>
     <string name="a_la_une">A la une</string>
+    <string name="logo">logo</string>
     <string-array name="liste">
         <item>France</item>
         <item>Italie</item>
