@@ -1,4 +1,4 @@
-package fr.iutlens.dubois.list
+package fr.iutlens.hilaireghesquiere.minews
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

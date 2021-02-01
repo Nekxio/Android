@@ -1,4 +1,4 @@
-package fr.iutlens.dubois.list
+package fr.iutlens.hilaireghesquiere.minews
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

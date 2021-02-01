@@ -1,4 +1,4 @@
-package fr.iutlens.dubois.list
+package fr.iutlens.hilaireghesquiere.minews
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import fr.iutlens.dubois.list.R
 
 class CustomAdapter(private val row_item_layout: Int,
                     private val onItemClickListener: ((Article) -> Unit)?,

@@ -1,4 +1,4 @@
-package fr.iutlens.dubois.list
+package fr.iutlens.hilaireghesquiere.minews
 
 import android.content.Context
 import androidx.room.Database
