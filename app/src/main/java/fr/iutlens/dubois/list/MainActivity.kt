@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity(){
         AppDatabase.getDatabase(this)
         model.clear()
         setContentView(R.layout.activity_main)
+        setSupportActionBar(mytoolbar)
 
         model.getChannel(this)
 
