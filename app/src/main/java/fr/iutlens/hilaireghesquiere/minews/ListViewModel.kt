@@ -39,7 +39,26 @@ class ListViewModel() : ViewModel() {
             "https://www.francetvinfo.fr/titres.rss" to "France Info",
             "https://www.lemonde.fr/rss/en_continu.xml" to "Le Monde",
             "https://www.france24.com/fr/rss" to "France 24",
-            "http://feeds.bbci.co.uk/news/world/rss.xml" to "BBC")
+            "http://feeds.bbci.co.uk/news/world/rss.xml" to "BBC",
+            "https://www.bfmtv.com/rss/info/flux-rss/flux-toutes-les-actualites/" to "BFMtv",
+            "http://www.economiematin.fr/flux/alaune.xml" to "Economie matin",
+            "https://www.europe1.fr/rss/actualites.xml" to "Europe1",
+            "https://www.sciencesetavenir.fr/rss.xml" to "Science et avenir",
+            "https://www.techniques-ingenieur.fr/actualite/articles/feed/" to "Technique Ingénieur",
+            "https://www.turbo.fr/global.xml" to "Turbo",
+            "https://www.01net.com/rss/info/flux-rss/flux-toutes-les-actualites/" to "01net",
+            "https://www.clubic.com/articles.rss" to "Clubic",
+            "https://www.cnetfrance.fr/feeds/rss/" to "Cnet France",
+            "https://hitek.fr/rss" to "Hitek",
+            "https://www.journaldugeek.com/feed/" to "Journal du geek",
+            "https://www.gamekult.com/feed.xml" to "Gamekult",
+            "https://www.nouvelobs.com/high-tech/rss.xml" to "Nouvelobs",
+            "http://www.gameblog.fr/rss.php" to "Gameblog",
+            "http://www.jeuxvideo.com/rss/rss.xml" to "jeuxvideo.com",
+            "https://cdn-elle.ladmedia.fr/var/plain_site/storage/flux_rss/fluxToutELLEfr.xml" to "toutEllefr",
+            "https://www.journaldesfemmes.fr/rss/" to "jounaldesfemmes",
+            "https://www.nouvelobs.com/voyage/rss.xml" to "nouvelobs voyage",
+            "https://jobs-stages.letudiant.fr/jobs-etudiants/rss.xml " to "l'Etudiant")
 
         url.forEach {
             viewModelScope.launch {
