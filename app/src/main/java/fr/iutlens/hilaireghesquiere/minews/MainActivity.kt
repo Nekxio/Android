@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(){
         ///////////////// configuration du recyclerView
         // On configure comment les éléments de la liste sont organisés : LinearLayout => liste
         recyclerView.layoutManager = GridLayoutManager(this, 2)
-        recyclerViewfavoris.layoutManager = GridLayoutManager(this, 4)
+        recyclerView_favoris.layoutManager = GridLayoutManager(this, 4)
         // On configure l'adapter, qui prendra les éléments de list, et les affichera en utilisant
         // le layout R.layout.text_row_item
         // On précise aussi les fonctions à appeler lors d'un clic (court / long) sur un élément

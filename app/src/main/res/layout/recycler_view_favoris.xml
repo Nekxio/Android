@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="100dp"
+    android:layout_height="100dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -11,7 +11,7 @@
         android:layout_margin="8dp"
         android:elevation="8dp"
         app:cardBackgroundColor="?colorSecondaryVariant"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="100dp"
         app:layout_constraintDimensionRatio="1:1">
 
         <LinearLayout
@@ -28,22 +28,12 @@
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="test"
-                android:textAlignment="textStart"
-                android:textColor="?colorOnSecondary"
-                android:maxLines="3"
-                android:ellipsize="end"/>
-            <TextView
                 android:id="@+id/source"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
+                android:padding="1dp"
                 android:text="test"
-                android:textAlignment="textStart"
+                android:layout_gravity="center"
                 android:textColor="?colorOnSecondary"
                 android:maxLines="3"
                 android:ellipsize="end"/>

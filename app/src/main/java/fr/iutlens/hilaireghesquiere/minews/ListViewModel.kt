@@ -35,38 +35,36 @@ class ListViewModel() : ViewModel() {
             .cacheExpirationMillis(10 * 60L * 100L) // 10 minutes
             .build()
 
-        val url = arrayOf(
-            "https://www.francetvinfo.fr/titres.rss" to "France Info",
-            "https://www.lemonde.fr/rss/en_continu.xml" to "Le Monde",
-            "https://www.france24.com/fr/rss" to "France 24",
-            "http://feeds.bbci.co.uk/news/world/rss.xml" to "BBC",
-            "https://www.bfmtv.com/rss/info/flux-rss/flux-toutes-les-actualites/" to "BFMtv",
-            "http://www.economiematin.fr/flux/alaune.xml" to "Economie matin",
-            "https://www.europe1.fr/rss/actualites.xml" to "Europe1",
-            "https://www.sciencesetavenir.fr/rss.xml" to "Science et avenir",
-            "https://www.techniques-ingenieur.fr/actualite/articles/feed/" to "Technique Ingénieur",
-            "https://www.turbo.fr/global.xml" to "Turbo",
-            "https://www.01net.com/rss/info/flux-rss/flux-toutes-les-actualites/" to "01net",
-            "https://www.clubic.com/articles.rss" to "Clubic",
-            "https://www.cnetfrance.fr/feeds/rss/" to "Cnet France",
-            "https://hitek.fr/rss" to "Hitek",
-            "https://www.journaldugeek.com/feed/" to "Journal du geek",
-            "https://www.gamekult.com/feed.xml" to "Gamekult",
-            "https://www.nouvelobs.com/high-tech/rss.xml" to "Nouvelobs",
-            "http://www.gameblog.fr/rss.php" to "Gameblog",
-            "http://www.jeuxvideo.com/rss/rss.xml" to "jeuxvideo.com",
-            "https://cdn-elle.ladmedia.fr/var/plain_site/storage/flux_rss/fluxToutELLEfr.xml" to "toutEllefr",
-            "https://www.journaldesfemmes.fr/rss/" to "jounaldesfemmes",
-            "https://www.nouvelobs.com/voyage/rss.xml" to "nouvelobs voyage",
-            "https://jobs-stages.letudiant.fr/jobs-etudiants/rss.xml " to "l'Etudiant")
+        val url = arrayOf<Flux>(
+            Flux("https://www.francetvinfo.fr/titres.rss", "France Info", "Actualité"),
+                Flux("https://www.lemonde.fr/rss/en_continu.xml","Le Monde", "Actualité"),
+                Flux("https://www.france24.com/fr/rss","France 24", "Actualité"),
+                Flux("http://feeds.bbci.co.uk/news/world/rss.xml","BBC", "Actualité"),
+                Flux("https://www.bfmtv.com/rss/info/flux-rss/flux-toutes-les-actualites/", "BFMTV","Actualité"),
+                Flux("http://www.economiematin.fr/flux/alaune.xml", "Economie matin","Économie"),
+                Flux("https://www.europe1.fr/rss/actualites.xml", "Europe1","Actualité"),
+                Flux("https://www.sciencesetavenir.fr/rss.xml", "Science et avenir","Science"),
+                Flux("https://www.turbo.fr/global.xml", "Turbo","Voiture"),
+                Flux("https://www.01net.com/rss/info/flux-rss/flux-toutes-les-actualites/", "01net","Informatique"),
+                Flux("https://www.clubic.com/articles.rss","Clubic","Informatique"),
+                Flux("https://www.cnetfrance.fr/feeds/rss/","Cnet France","Informatique"),
+                Flux("https://hitek.fr/rss","Hitek","Jeux-vidéo"),
+                Flux("https://www.journaldugeek.com/feed/","Journal du geek","Jeux-vidéo"),
+                Flux( "https://www.gamekult.com/feed.xml","Gamekult","Jeux-vidéo"),
+                Flux("https://www.nouvelobs.com/high-tech/rss.xml","Nouvelobs","Informatique"),
+                Flux("http://www.gameblog.fr/rss.php", "Gameblog","Jeux-vidéo"),
+                Flux("http://www.jeuxvideo.com/rss/rss.xml","jeuxvideo.com","Jeux-vidéo"),
+                Flux("https://cdn-elle.ladmedia.fr/var/plain_site/storage/flux_rss/fluxToutELLEfr.xml","Elle","Femme"),
+                Flux("https://www.journaldesfemmes.fr/rss/","jounaldesfemmes","Femme"),
+                Flux("https://www.nouvelobs.com/voyage/rss.xml", "nouvelobs voyage","Voyage"))
 
         url.forEach {
             viewModelScope.launch {
                 try {
-                    val channel = parser.getChannel(it.first)
+                    val channel = parser.getChannel(it.url)
 
                     AppDatabase.getDatabase()?.articleDao()?.insertAll(
-                        *channel.articles.map { article ->  Article(article,channel.image?.url,it.second) }.toTypedArray()
+                        *channel.articles.map { article ->  Article(article,channel.image?.url,it.name, it.category) }.toTypedArray()
                     )
                     // Do something with your data
                 } catch (e: Exception) {

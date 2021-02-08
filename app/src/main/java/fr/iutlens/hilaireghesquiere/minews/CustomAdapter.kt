@@ -48,7 +48,7 @@ class CustomAdapter(private val row_item_layout: Int,
         if (article.image == null){
             viewHolder.imageView.setImageDrawable(null)
         } else {
-            article.image?.let { Picasso.get().load(article.image).into(viewHolder.imageView); }
+            article.image.let { Picasso.get().load(article.image).into(viewHolder.imageView); }
         }
 
 
