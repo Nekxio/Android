@@ -27,6 +27,10 @@ class ListViewModel() : ViewModel() {
         return AppDatabase.getDatabase()?.articleDao()?.getAll()?.asLiveData()
     }
 
+    fun allCategories(category: String): LiveData<List<Article>>? {
+        return AppDatabase.getDatabase()?.articleDao()?.getCategory(category)?.asLiveData()
+    }
+
     fun getChannel(context: Context) {
 //        clear()
         val parser = Parser.Builder()

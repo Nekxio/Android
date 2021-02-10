@@ -33,7 +33,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:title="WELCOME"
+                app:title="MiNews"
                 app:titleTextColor="#fff" />
 
             <ImageView
@@ -68,8 +68,8 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="411dp"
+        android:layout_height="585dp"
         android:layout_marginTop="200dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,22 +96,75 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <HorizontalScrollView
+        android:layout_width="410dp"
+        android:layout_height="95dp"
+        android:layout_alignParentBottom="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/swipeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2"
+        app:layout_constraintVertical_bias="1.0">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_favoris"
-            android:layout_width="411dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="78dp"
-            android:layout_marginBottom="553dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="4"
-            tools:listitem="@layout/recycler_view_favoris"></androidx.recyclerview.widget.RecyclerView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:minWidth="200dp"
+            android:orientation="horizontal">
+
+            <include
+                layout="@layout/recycler_view_favoris"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:onClick="onCategoryClick"/>
+
+            <include
+                layout="@layout/recycler_view_favoris"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1" />
+
+            <include
+                layout="@layout/recycler_view_favoris"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1" />
+
+            <include
+                layout="@layout/recycler_view_favoris"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1" />
+
+            <include
+                layout="@layout/recycler_view_favoris"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1" />
+
+            <include
+                layout="@layout/recycler_view_favoris"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1" />
+
+            <include
+                layout="@layout/recycler_view_favoris"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

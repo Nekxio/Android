@@ -3,6 +3,7 @@ package fr.iutlens.hilaireghesquiere.minews
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,7 +28,6 @@ class MainActivity : AppCompatActivity(){
         ///////////////// configuration du recyclerView
         // On configure comment les éléments de la liste sont organisés : LinearLayout => liste
         recyclerView.layoutManager = GridLayoutManager(this, 2)
-        recyclerView_favoris.layoutManager = GridLayoutManager(this, 4)
         // On configure l'adapter, qui prendra les éléments de list, et les affichera en utilisant
         // le layout R.layout.text_row_item
         // On précise aussi les fonctions à appeler lors d'un clic (court / long) sur un élément
@@ -56,4 +56,11 @@ class MainActivity : AppCompatActivity(){
         return true
     }
 
+    fun onCategoryClick(view: View) {
+        model.allCategories("Actualité")?.observe(this) {
+            // Update the cached copy of the words in the adapter.
+            adapter.submitList(it)
+            swipeLayout.isRefreshing = false;
+        }
+    }
 }

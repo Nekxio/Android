@@ -8,6 +8,9 @@ interface articleDao {
     @Query("SELECT * FROM article ORDER BY pubDate DESC")
     fun getAll(): Flow<List<Article>>
 
+    @Query("SELECT * FROM article WHERE category LIKE :category ORDER BY pubDate DESC")
+    fun getCategory(category: String): Flow<List<Article>>
+
     @Query("SELECT * FROM article WHERE guid LIKE :guid LIMIT 1")
     suspend fun findByGUID(guid: String): Article
 
