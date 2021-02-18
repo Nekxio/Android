@@ -120,48 +120,54 @@
                 layout="@layout/recycler_view_actu"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginStart="20dp" />
 
             <include
                 layout="@layout/recycler_view_economy"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_weight="1" />
 
             <include
                 layout="@layout/recycler_view_woman"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_weight="1" />
 
             <include
                 layout="@layout/recycler_view_science"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_weight="1" />
 
             <include
                 layout="@layout/recycler_view_computer"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_weight="1" />
 
             <include
                 layout="@layout/recycler_view_games"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_weight="1" />
 
             <include
                 layout="@layout/recycler_view_car"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1" />
+            <include
+                layout="@layout/recycler_view_travel"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
                 android:layout_weight="1" />
 
         </LinearLayout>
