@@ -3,11 +3,14 @@ package fr.iutlens.hilaireghesquiere.minews
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import fr.iutlens.dubois.list.R
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -22,7 +25,6 @@ class MainActivity : AppCompatActivity(){
         model.clear()
         setContentView(R.layout.activity_main)
         setSupportActionBar(mytoolbar)
-
         model.getChannel(this)
 
         ///////////////// configuration du recyclerView
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity(){
         model.allElements()?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
+            recyclerView.scrollToPosition(0)
             swipeLayout.isRefreshing = false;
         }
         recyclerView.adapter = adapter
@@ -56,67 +59,87 @@ class MainActivity : AppCompatActivity(){
         return true
     }
 
-    fun onCategoryClickActu(view: View) {
+    fun onCategoryClickActu() {
         model.allCategories("Actualité")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
+            recyclerView.scrollToPosition(0)
             swipeLayout.isRefreshing = false;
         }
     }
 
-    fun onCategoryClickCar(view: View) {
+    fun onCategoryClickCar() {
         model.allCategories("Voiture")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
+            recyclerView.scrollToPosition(0)
             swipeLayout.isRefreshing = false;
         }
     }
 
-    fun onCategoryClickComputer(view: View) {
+    fun onCategoryClickComputer() {
         model.allCategories("Informatique")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
+            recyclerView.scrollToPosition(0)
             swipeLayout.isRefreshing = false;
         }
     }
 
-    fun onCategoryClickEconomy(view: View) {
+    fun onCategoryClickEconomy() {
         model.allCategories("Economie")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
+            recyclerView.scrollToPosition(0)
             swipeLayout.isRefreshing = false;
         }
     }
 
-    fun onCategoryClickScience(view: View) {
+    fun onCategoryClickScience() {
         model.allCategories("Science")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
+            recyclerView.scrollToPosition(0)
             swipeLayout.isRefreshing = false;
         }
     }
 
-    fun onCategoryClickTravel(view: View) {
+    fun onCategoryClickTravel() {
         model.allCategories("Voyage")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
+            recyclerView.scrollToPosition(0)
             swipeLayout.isRefreshing = false;
         }
     }
 
-    fun onCategoryClickWoman(view: View) {
+    fun onCategoryClickWoman() {
         model.allCategories("Femme")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
+            recyclerView.scrollToPosition(0)
             swipeLayout.isRefreshing = false;
         }
     }
 
-    fun onCategoryClickGames(view: View) {
+    fun onCategoryClickGames() {
         model.allCategories("Jeux-vidéo")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
+            recyclerView.scrollToPosition(0)
             swipeLayout.isRefreshing = false;
         }
     }
+
+    fun menuUne(item: MenuItem) {
+
+    }
+    fun menuLastNews(item: MenuItem) {
+        model.getChannel(this@MainActivity)
+    }
+    fun menuSources(item: MenuItem){
+        val intent = Intent(this, Sources::class.java);
+        startActivity(intent)
+    }
+
 }

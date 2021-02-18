@@ -3,16 +3,19 @@
     <item
         android:id="@+id/page_1"
         android:enabled="true"
-        android:icon="@android:drawable/btn_star"
-        android:title="@string/decouvrir" />
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="@string/a_la_une"
+        android:onClick="menuUne"/>
     <item
         android:id="@+id/page_2"
         android:enabled="true"
-        android:icon="@android:drawable/arrow_down_float"
-        android:title="@string/mon_actu" />
+        android:icon="@android:drawable/arrow_up_float"
+        android:title="@string/Derniere_news"
+        android:onClick="menuLastNews"/>
     <item
         android:id="@+id/page_3"
         android:enabled="true"
-        android:icon="@android:drawable/btn_star_big_on"
-        android:title="@string/a_la_une" />
+        android:icon="@android:drawable/ic_dialog_email"
+        android:title="@string/sources"
+        android:onClick="menuSources"/>
 </menu>

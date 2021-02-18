@@ -4,6 +4,10 @@
     <string name="mon_actu">Mon actu</string>
     <string name="a_la_une">A la une</string>
     <string name="logo">logo</string>
+    <string name="sources">sources</string>
+    <string name="refresh">refresh</string>
+    <string name="Derniere_news">Dernière news</string>
+    <string name="categories">Catégories :</string>
     <string-array name="liste">
         <item>France</item>
         <item>Italie</item>
