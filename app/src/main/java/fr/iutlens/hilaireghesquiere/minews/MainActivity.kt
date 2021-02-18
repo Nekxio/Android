@@ -56,8 +56,64 @@ class MainActivity : AppCompatActivity(){
         return true
     }
 
-    fun onCategoryClick(view: View) {
+    fun onCategoryClickActu(view: View) {
         model.allCategories("Actualité")?.observe(this) {
+            // Update the cached copy of the words in the adapter.
+            adapter.submitList(it)
+            swipeLayout.isRefreshing = false;
+        }
+    }
+
+    fun onCategoryClickCar(view: View) {
+        model.allCategories("Voiture")?.observe(this) {
+            // Update the cached copy of the words in the adapter.
+            adapter.submitList(it)
+            swipeLayout.isRefreshing = false;
+        }
+    }
+
+    fun onCategoryClickComputer(view: View) {
+        model.allCategories("Informatique")?.observe(this) {
+            // Update the cached copy of the words in the adapter.
+            adapter.submitList(it)
+            swipeLayout.isRefreshing = false;
+        }
+    }
+
+    fun onCategoryClickEconomy(view: View) {
+        model.allCategories("Economie")?.observe(this) {
+            // Update the cached copy of the words in the adapter.
+            adapter.submitList(it)
+            swipeLayout.isRefreshing = false;
+        }
+    }
+
+    fun onCategoryClickScience(view: View) {
+        model.allCategories("Science")?.observe(this) {
+            // Update the cached copy of the words in the adapter.
+            adapter.submitList(it)
+            swipeLayout.isRefreshing = false;
+        }
+    }
+
+    fun onCategoryClickTravel(view: View) {
+        model.allCategories("Voyage")?.observe(this) {
+            // Update the cached copy of the words in the adapter.
+            adapter.submitList(it)
+            swipeLayout.isRefreshing = false;
+        }
+    }
+
+    fun onCategoryClickWoman(view: View) {
+        model.allCategories("Femme")?.observe(this) {
+            // Update the cached copy of the words in the adapter.
+            adapter.submitList(it)
+            swipeLayout.isRefreshing = false;
+        }
+    }
+
+    fun onCategoryClickGames(view: View) {
+        model.allCategories("Jeux-vidéo")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
             swipeLayout.isRefreshing = false;
