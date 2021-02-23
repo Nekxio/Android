@@ -23,7 +23,7 @@ class Sources : AppCompatActivity() {
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val rowView: View = inflater.inflate(R.layout.text_row_sources, null)
             rowView.findViewById<TextView>(R.id.textView).text = it.name
-            rowView.findViewById<TextView>(R.id.source).text = it.url
+            rowView.findViewById<TextView>(R.id.source).text = it.editeur
             rowView.setOnClickListener {view ->
                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it.editeur))
                 startActivity(browserIntent)

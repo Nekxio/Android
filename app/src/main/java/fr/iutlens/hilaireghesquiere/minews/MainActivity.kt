@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(){
         AppDatabase.getDatabase(this)
         model.clear()
         setContentView(R.layout.activity_main)
-        setSupportActionBar(mytoolbar)
+        setSupportActionBar(my_tool_bar)
         model.getChannel(this)
 
         ///////////////// configuration du recyclerView
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(){
         return true
     }
 
-    fun onCategoryClickActu() {
+    fun onCategoryClickActu(view: View) {
         model.allCategories("Actualité")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    fun onCategoryClickCar() {
+    fun onCategoryClickCar(view: View) {
         model.allCategories("Voiture")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    fun onCategoryClickComputer() {
+    fun onCategoryClickComputer(view: View) {
         model.allCategories("Informatique")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    fun onCategoryClickEconomy() {
+    fun onCategoryClickEconomy(view: View) {
         model.allCategories("Economie")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    fun onCategoryClickScience() {
+    fun onCategoryClickScience(view: View) {
         model.allCategories("Science")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    fun onCategoryClickTravel() {
+    fun onCategoryClickTravel(view: View) {
         model.allCategories("Voyage")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    fun onCategoryClickWoman() {
+    fun onCategoryClickWoman(view: View) {
         model.allCategories("Femme")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)
@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    fun onCategoryClickGames() {
+    fun onCategoryClickGames(view: View) {
         model.allCategories("Jeux-vidéo")?.observe(this) {
             // Update the cached copy of the words in the adapter.
             adapter.submitList(it)

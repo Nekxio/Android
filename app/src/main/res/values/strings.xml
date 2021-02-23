@@ -8,6 +8,7 @@
     <string name="refresh">refresh</string>
     <string name="Derniere_news">Dernière news</string>
     <string name="categories">Catégories :</string>
+    <string name="test">test</string>
     <string-array name="liste">
         <item>France</item>
         <item>Italie</item>
